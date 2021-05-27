@@ -2,21 +2,21 @@ import React from "react";
 import { PublicClientApplication } from "@azure/msal-browser";
 import { config } from "./config";
 
-export class AuthComponentProps {
-	error;
-	isAuthenticated;
-	user;
-	login;
-	logout;
-	getAccessToken;
-	setError;
-}
+// export class AuthComponentProps {
+// 	error;
+// 	isAuthenticated;
+// 	user;
+// 	login;
+// 	logout;
+// 	getAccessToken;
+// 	setError;
+// }
 
-class AuthProviderState {
-	error;
-	isAuthenticated;
-	user;
-}
+// class AuthProviderState {
+// 	error;
+// 	isAuthenticated;
+// 	user;
+// }
 
 export default function withAuthProvider(WrappedComponent) {
 	return class extends React.Component {
