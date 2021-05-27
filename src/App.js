@@ -9,6 +9,7 @@ import MailView from "./components/MailView";
 import MailList from "./components/MailList";
 import InboxList from "./components/InboxList";
 import StickyNote from "./components/StickyNote";
+import LoginButton from "./components/LoginButton";
 
 class App extends Component {
 	render() {
@@ -23,7 +24,11 @@ class App extends Component {
 		}
 		return (
 			<Container fluid={true}>
-				<InboxList />
+				<LoginButton authButtonMethod={this.props.login} />
+				<InboxList
+					user={this.props.user}
+					isAuthenticated={this.props.isAuthenticated}
+				/>
 				<StickyNote />
 				<MailList />
 				<MailView />

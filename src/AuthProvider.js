@@ -1,6 +1,7 @@
 import React from "react";
 import { PublicClientApplication } from "@azure/msal-browser";
 import { config } from "./config";
+import getUserDetails from "./GraphService";
 
 // export class AuthComponentProps {
 // 	error;
@@ -26,7 +27,7 @@ export default function withAuthProvider(WrappedComponent) {
 			this.state = {
 				error: null,
 				isAuthenticated: false,
-				user: {},
+				user: "hi",
 			};
 
 			this.publicClientApplication = new PublicClientApplication({
@@ -77,19 +78,14 @@ export default function withAuthProvider(WrappedComponent) {
 			} catch (err) {
 				this.setState({
 					isAuthenticated: false,
-					user: {},
+					user: "hello",
 					error: this.normalizeError(err),
 				});
 			}
 		}
 
-		logoutRequest = {
-			account:
-				this.publicClientApplication.getAccountByHomeId(homeAccountId),
-		};
-
 		logout() {
-			this.publicClientApplication.logoutRedirect(this.logoutRequest);
+			this.publicClientApplication.logout();
 		}
 
 		async getAccessToken(scopes) {
@@ -120,8 +116,12 @@ export default function withAuthProvider(WrappedComponent) {
 			try {
 				let accessToken = await this.getAccessToken(config.scopes);
 				if (accessToken) {
+					let user = await getUserDetails(accessToken);
 					this.setState({
 						isAuthenticated: true,
+						user: {
+							displayName: user.displayName,
+						},
 						error: {
 							message: "Access token:",
 							debug: accessToken,
@@ -131,7 +131,7 @@ export default function withAuthProvider(WrappedComponent) {
 			} catch (err) {
 				this.setState({
 					isAuthenticated: false,
-					user: {},
+					user: "how ya do",
 					error: this.normalizeError(err),
 				});
 			}
