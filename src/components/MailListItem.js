@@ -3,17 +3,20 @@ import { Row, Col } from "reactstrap";
 
 export default class MailListItem extends Component {
 	render() {
+		console.log(this.props);
 		return (
 			<Row className="mailListItem">
 				<Col>
-					<div>
-						<span className="mailListItemSubject">
-							Email Subject{" "}
-						</span>
-						from Sender
+					<div className="mailListItemSubject">
+						{this.props.item.subject.substring(0, 45) + "..."}
+					</div>
+					<div className="mailListItemSender">
+						from {this.props.item.from.emailAddress.name}
 					</div>
 
-					<p>Email preview</p>
+					<p className="mailListItemBody">
+						{this.props.item.bodyPreview.substring(0, 110) + "..."}
+					</p>
 				</Col>
 			</Row>
 		);

@@ -13,6 +13,7 @@ import LoginButton from "./components/LoginButton";
 
 class App extends Component {
 	render() {
+		console.log(this.props);
 		let error = null;
 		if (this.props.error) {
 			error = (
@@ -30,7 +31,10 @@ class App extends Component {
 					isAuthenticated={this.props.isAuthenticated}
 				/>
 				<StickyNote />
-				<MailList />
+				<MailList
+					mail={this.props.mail}
+					isAuthenticated={this.props.isAuthenticated}
+				/>
 				<MailView />
 			</Container>
 		);

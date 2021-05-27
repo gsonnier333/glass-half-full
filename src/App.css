@@ -62,12 +62,22 @@
 .mailListItem {
 	border-bottom: 1px solid lightslategrey;
 	margin: 1px;
-	height: 10%;
+	height: 12%;
+	overflow: hidden;
 }
 
 .mailListItemSubject {
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 16px;
+}
+
+.mailListItemBody {
+	font-size: 14px;
+}
+
+.mailListItemSender {
+	font-size: 15px;
+	font-weight: 500;
 }
 
 #inboxList {

@@ -4,12 +4,17 @@ import { Container } from "reactstrap";
 
 export default class MailList extends Component {
 	render() {
-		return (
-			<Container id="mailList">
-				<MailListItem />
-				<MailListItem />
-				<MailListItem />
-			</Container>
-		);
+		if (this.props.isAuthenticated) {
+			console.log(this.props.mail[0]);
+			return (
+				<Container id="mailList">
+					{this.props.mail.map((message) => {
+						return <MailListItem item={message} />;
+					})}
+				</Container>
+			);
+		}
+
+		return <Container id="mailList"></Container>;
 	}
 }

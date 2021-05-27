@@ -1,7 +1,7 @@
 import React from "react";
 import { PublicClientApplication } from "@azure/msal-browser";
 import { config } from "./config";
-import getUserDetails from "./GraphService";
+import { getUserDetails, getMail } from "./GraphService";
 
 // export class AuthComponentProps {
 // 	error;
@@ -56,6 +56,7 @@ export default function withAuthProvider(WrappedComponent) {
 					error={this.state.error}
 					isAuthenticated={this.state.isAuthenticated}
 					user={this.state.user}
+					mail={this.state.mail}
 					login={() => this.login()}
 					logout={() => this.logout()}
 					getAccessToken={(scopes) => this.getAccessToken(scopes)}
@@ -66,6 +67,18 @@ export default function withAuthProvider(WrappedComponent) {
 				/>
 			);
 		}
+
+		// async refreshMail() {
+		// 	try {
+		// 		await this.getUserMail();
+		// 	} catch (err) {
+		// 		this.setState({
+		// 			isAuthenticated: false,
+		// 			mail: ["ERROR"],
+		// 			error: this.normalizeError(err),
+		// 		});
+		// 	}
+		// }
 
 		async login() {
 			try {
@@ -117,11 +130,14 @@ export default function withAuthProvider(WrappedComponent) {
 				let accessToken = await this.getAccessToken(config.scopes);
 				if (accessToken) {
 					let user = await getUserDetails(accessToken);
+					let mail = await getMail(accessToken);
+					let messages = mail.value;
 					this.setState({
 						isAuthenticated: true,
 						user: {
 							displayName: user.displayName,
 						},
+						mail: messages,
 						error: {
 							message: "Access token:",
 							debug: accessToken,
@@ -132,10 +148,34 @@ export default function withAuthProvider(WrappedComponent) {
 				this.setState({
 					isAuthenticated: false,
 					user: "how ya do",
+					mail: "error",
 					error: this.normalizeError(err),
 				});
 			}
 		}
+
+		// async getUserMail() {
+		// 	try {
+		// 		let accessToken = await this.getAccessToken(config.scopes);
+		// 		if (accessToken) {
+		// 			let mail = await getMail(accessToken);
+		// 			this.setState({
+		// 				isAuthenticated: true,
+		// 				mail: [mail[0], mail[1], mail[2]],
+		// 				error: {
+		// 					message: "Access token:",
+		// 					debug: accessToken,
+		// 				},
+		// 			});
+		// 		}
+		// 	} catch (err) {
+		// 		this.setState({
+		// 			isAuthenticated: false,
+		// 			user: "how ya do",
+		// 			error: this.normalizeError(err),
+		// 		});
+		// 	}
+		// }
 
 		setErrorMessage(message, debug) {
 			this.setState({
