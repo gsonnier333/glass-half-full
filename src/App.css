@@ -61,9 +61,15 @@
 
 .mailListItem {
 	border-bottom: 1px solid lightslategrey;
-	margin: 1px;
+	padding-top: 5px;
 	height: 12%;
 	overflow: hidden;
+	background-color: white;
+	cursor: pointer;
+}
+
+.mailListItem.focused {
+	background-color: lightsteelblue;
 }
 
 .mailListItemSubject {

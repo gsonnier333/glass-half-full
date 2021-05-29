@@ -35,7 +35,7 @@ class App extends Component {
 				focusedMailId: id,
 				focusedMessage: message,
 			}));
-			console.log(message);
+			//console.log(message);
 		}
 	}
 

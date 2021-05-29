@@ -12,9 +12,9 @@ export default class MailList extends Component {
 	}
 
 	selectMessage(id) {
-		this.setState(() => ({
+		this.setState({
 			focusedMailId: id,
-		}));
+		});
 		//console.log(id);
 		this.props.view(id); //passes the id back up to App.js to be used in the MailView window
 	}
@@ -25,11 +25,16 @@ export default class MailList extends Component {
 			return (
 				<Container id="mailList">
 					{this.props.mail.map((message) => {
+						let isFocused = false;
+						if (this.state.focusedMailId === message.id) {
+							isFocused = true;
+						}
 						return (
 							<MailListItem
 								item={message}
 								select={this.selectMessage}
 								key={message.id}
+								focused={isFocused}
 							/>
 						);
 					})}

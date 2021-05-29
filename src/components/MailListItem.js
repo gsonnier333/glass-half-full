@@ -6,7 +6,7 @@ export default class MailListItem extends Component {
 		super(props);
 		this.state = {
 			mailId: props.item.id,
-			focused: false,
+			focused: props.focused,
 		};
 		this.handleSelect = this.handleSelect.bind(this);
 	}
@@ -17,10 +17,22 @@ export default class MailListItem extends Component {
 		//console.log(this.props.item.subject);
 		this.props.select(this.state.mailId);
 	}
+	componentDidUpdate(prevProps) {
+		if (this.props !== prevProps) {
+			this.setState({
+				focused: this.props.focused,
+			});
+		}
+	}
 	render() {
 		//console.log(this.props);
 		return (
-			<Row className="mailListItem" onClick={this.handleSelect}>
+			<Row
+				className={`mailListItem ${
+					this.state.focused ? "focused" : "unfocused"
+				}`}
+				onClick={this.handleSelect}
+			>
 				<Col>
 					<div className="mailListItemSubject">
 						{this.props.item.subject.substring(0, 45) + "..."}
