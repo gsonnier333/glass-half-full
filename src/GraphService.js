@@ -25,7 +25,7 @@ export async function getMail(accessToken) {
 
 	const mail = await client
 		.api("/me/messages/")
-		.select("body,bodyPreview,subject,from")
+		.select("body,bodyPreview,subject,from,id")
 		.get();
 
 	return mail;

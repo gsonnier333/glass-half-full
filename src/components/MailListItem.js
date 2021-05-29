@@ -2,10 +2,25 @@ import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
 
 export default class MailListItem extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			mailId: props.item.id,
+			focused: false,
+		};
+		this.handleSelect = this.handleSelect.bind(this);
+	}
+	handleSelect() {
+		this.setState(() => ({
+			focused: true,
+		}));
+		//console.log(this.props.item.subject);
+		this.props.select(this.state.mailId);
+	}
 	render() {
-		console.log(this.props);
+		//console.log(this.props);
 		return (
-			<Row className="mailListItem">
+			<Row className="mailListItem" onClick={this.handleSelect}>
 				<Col>
 					<div className="mailListItemSubject">
 						{this.props.item.subject.substring(0, 45) + "..."}

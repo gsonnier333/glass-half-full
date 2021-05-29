@@ -12,8 +12,35 @@ import StickyNote from "./components/StickyNote";
 import LoginButton from "./components/LoginButton";
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			focusedMailId: null, //this will be the id of the mail item being rendered to the MailView component. null when none selected
+			focusedMessage: null, //this will be the contents of the mail item being rendered to the MailView component
+		};
+		this.viewMessage = this.viewMessage.bind(this);
+	}
+
+	viewMessage(id) {
+		let message = null;
+		this.props.mail.forEach((m) => {
+			if (m.id === id) {
+				message = m;
+			}
+		});
+		if (message === null) {
+			console.log("Error selecting message");
+		} else {
+			this.setState(() => ({
+				focusedMailId: id,
+				focusedMessage: message,
+			}));
+			console.log(message);
+		}
+	}
+
 	render() {
-		console.log(this.props);
+		//console.log(this.props);
 		let error = null;
 		if (this.props.error) {
 			error = (
@@ -34,8 +61,9 @@ class App extends Component {
 				<MailList
 					mail={this.props.mail}
 					isAuthenticated={this.props.isAuthenticated}
+					view={this.viewMessage}
 				/>
-				<MailView />
+				<MailView message={this.state.focusedMessage} />
 			</Container>
 		);
 	}
