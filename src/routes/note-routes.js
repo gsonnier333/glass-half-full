@@ -25,7 +25,20 @@ module.exports = (app) => {
 				res.json(data);
 			})
 			.catch((err) => {
-				console.log(err);
+				res.json(err);
+			});
+	});
+
+	app.get("/api/notes/:id", (req, res) => {
+		console.log(req.params.id);
+		db.Note.findAll({
+			attributes: ["userNotes"],
+			where: { userId: req.params.id },
+		})
+			.then((data) => {
+				res.json(data);
+			})
+			.catch((err) => {
 				res.json(err);
 			});
 	});

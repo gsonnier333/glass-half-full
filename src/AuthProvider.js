@@ -135,7 +135,7 @@ export default function withAuthProvider(WrappedComponent) {
 					this.setState({
 						isAuthenticated: true,
 						user: {
-							displayName: user.displayName,
+							...user,
 						},
 						mail: messages,
 						error: {
