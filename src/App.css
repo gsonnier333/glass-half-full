@@ -39,15 +39,19 @@
 
 body {
 	background-image: url("./assets/hazy-mountains-bg.jpg");
-	background-size: 100%;
+	background-size: 1920px, 1080px;
+	height: 100vh;
+	width: 100vw;
+	/* overflow: auto; */
 }
 
 #mailView {
 	position: absolute;
-	right: 0px;
-	width: 1152px;
+	left: 798px;
+	top: 40px;
+	width: 1100px;
 	margin: 10px;
-	height: 93.5vmin;
+	height: 875px;
 	border: 1px solid rgba(200, 200, 210, 0.9);
 	float: right;
 	overflow: auto;
@@ -57,19 +61,22 @@ body {
 #mailList {
 	position: absolute;
 	float: left;
-	right: 1152px;
+	left: 355px;
+	top: 40px;
 	width: 422px;
-	height: 93.5vmin;
+	height: 875px;
 	border: 1px solid rgba(200, 200, 210, 0.9);
 	margin: 10px 20px;
-	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 	background-color: rgba(255, 255, 255, 0.9);
 }
 
 .mailListItem {
 	border-bottom: 1px solid rgba(119, 136, 153, 0.9);
 	padding-top: 5px;
-	height: 12%;
+	width: inherit;
+	height: 100px;
 	overflow: hidden;
 
 	cursor: pointer;
@@ -97,9 +104,10 @@ body {
 #inboxList {
 	float: left;
 	position: absolute;
-	left: 0%;
-	width: 306px;
-	height: 63.5vmin;
+	left: 0px;
+	top: 40px;
+	width: 353px;
+	height: 540px;
 	margin: 10px 10px 0px;
 	border: 1px solid rgba(200, 200, 210, 0.9);
 	background-color: rgba(255, 255, 255, 0.9);
@@ -108,10 +116,10 @@ body {
 #stickyNote {
 	float: left;
 	position: absolute;
-	left: 0%;
-	bottom: 0%;
-	height: 29vmin;
-	width: 306px;
+	left: 0px;
+	top: 602px;
+	height: 323px;
+	width: 353px;
 	margin: 0px 10px 12px 10px;
 	padding: 10px;
 	background-color: rgba(255, 255, 161, 0.9);
@@ -124,15 +132,20 @@ h1 {
 	float: left;
 }
 
-.customNavbar {
+#customNavbar {
 	border: 1px solid rgba(200, 200, 210, 0.9);
 	background-color: rgba(255, 255, 255, 0.9);
 	height: 40px;
 	padding: 0px 10px;
+	position: sticky;
+	top: 0;
+	right: 0;
+	z-index: 2;
+	width: 1920px;
 }
 
 #logButton {
-	position: absolute;
+	position: sticky;
 	top: 0;
 	height: 35px;
 	background-color: rgba(230, 230, 230, 0.9);
@@ -147,4 +160,9 @@ h4 {
 	float: right;
 	top: 2px;
 	left: 95px;
+}
+
+#appWrapper {
+	height: 100vh;
+	width: 100vw;
 }

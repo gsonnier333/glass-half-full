@@ -51,13 +51,13 @@ class App extends Component {
 			);
 		}
 		return (
-			<div>
+			<div id="appWrapper">
 				<TopBar
 					isAuthenticated={this.props.isAuthenticated}
 					loginMethod={this.props.login}
 					logoutMethod={this.props.logout}
 				/>
-				<Container fluid={true}>
+				<Container>
 					<InboxList
 						user={this.props.user}
 						isAuthenticated={this.props.isAuthenticated}

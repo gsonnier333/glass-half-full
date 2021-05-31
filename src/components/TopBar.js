@@ -6,8 +6,8 @@ import { Navbar, Nav, NavItem } from "reactstrap";
 export default class TopBar extends Component {
 	render() {
 		return (
-			<Navbar bg="light" expand="false" className="customNavbar">
-				<Nav className="mr-auto">
+			<Navbar fluid={true} bg="light" id="customNavbar">
+				<Nav>
 					{this.props.isAuthenticated ? (
 						<LogoutButton logoutMethod={this.props.logoutMethod} />
 					) : (
