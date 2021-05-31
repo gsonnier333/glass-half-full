@@ -3,7 +3,7 @@ import { Button } from "reactstrap";
 
 export default function LoginButton(props) {
 	return (
-		<Button color="primary" onClick={props.authButtonMethod}>
+		<Button onClick={props.authButtonMethod} id="logButton">
 			Login
 		</Button>
 	);

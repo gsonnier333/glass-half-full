@@ -9,6 +9,7 @@ import MailView from "./components/MailView";
 import MailList from "./components/MailList";
 import InboxList from "./components/InboxList";
 import StickyNote from "./components/StickyNote";
+import TopBar from "./components/TopBar";
 
 class App extends Component {
 	constructor(props) {
@@ -50,24 +51,29 @@ class App extends Component {
 			);
 		}
 		return (
-			<Container fluid={true}>
-				<InboxList
-					user={this.props.user}
+			<div>
+				<TopBar
 					isAuthenticated={this.props.isAuthenticated}
 					loginMethod={this.props.login}
 					logoutMethod={this.props.logout}
 				/>
-				<StickyNote
-					user={this.props.user}
-					isAuthenticated={this.props.isAuthenticated}
-				/>
-				<MailList
-					mail={this.props.mail}
-					isAuthenticated={this.props.isAuthenticated}
-					view={this.viewMessage}
-				/>
-				<MailView message={this.state.focusedMessage} />
-			</Container>
+				<Container fluid={true}>
+					<InboxList
+						user={this.props.user}
+						isAuthenticated={this.props.isAuthenticated}
+					/>
+					<StickyNote
+						user={this.props.user}
+						isAuthenticated={this.props.isAuthenticated}
+					/>
+					<MailList
+						mail={this.props.mail}
+						isAuthenticated={this.props.isAuthenticated}
+						view={this.viewMessage}
+					/>
+					<MailView message={this.state.focusedMessage} />
+				</Container>
+			</div>
 		);
 	}
 }

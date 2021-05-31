@@ -47,7 +47,7 @@ body {
 	right: 0px;
 	width: 1152px;
 	margin: 10px;
-	height: 98vmin;
+	height: 93.5vmin;
 	border: 1px solid rgba(200, 200, 210, 0.9);
 	float: right;
 	overflow: auto;
@@ -59,7 +59,7 @@ body {
 	float: left;
 	right: 1152px;
 	width: 422px;
-	height: 98vmin;
+	height: 93.5vmin;
 	border: 1px solid rgba(200, 200, 210, 0.9);
 	margin: 10px 20px;
 	overflow: auto;
@@ -121,4 +121,29 @@ body {
 
 h1 {
 	float: left;
+}
+
+.customNavbar {
+	border: 1px solid rgba(200, 200, 210, 0.9);
+	background-color: rgba(255, 255, 255, 0.9);
+	height: 40px;
+	padding: 0px 10px;
+}
+
+#logButton {
+	position: absolute;
+	top: 0;
+	height: 35px;
+	background-color: rgba(230, 230, 230, 0.9);
+	color: black;
+	float: left;
+	border-radius: 5px;
+	font-weight: 500;
+}
+
+h4 {
+	position: absolute;
+	float: right;
+	top: 2px;
+	left: 95px;
 }

@@ -13,24 +13,7 @@ export default class InboxList extends Component {
 		// }
 		return (
 			<Container id="inboxList">
-				<Row>
-					<Col>
-						{this.props.isAuthenticated ? (
-							<h1>{this.props.user.displayName}</h1>
-						) : (
-							<div />
-						)}
-						<LoginButton
-							authButtonMethod={this.props.loginMethod}
-						/>
-					</Col>
-				</Row>
-				<br />
-				<Row>
-					<Col>
-						<LogoutButton logoutMethod={this.props.logoutMethod} />
-					</Col>
-				</Row>
+				<h5>Inboxes [Coming Soon]</h5>
 			</Container>
 		);
 	}
