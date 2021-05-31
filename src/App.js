@@ -9,8 +9,6 @@ import MailView from "./components/MailView";
 import MailList from "./components/MailList";
 import InboxList from "./components/InboxList";
 import StickyNote from "./components/StickyNote";
-import LoginButton from "./components/LoginButton";
-import LogoutButton from "./components/LogoutButton";
 
 class App extends Component {
 	constructor(props) {
@@ -53,11 +51,11 @@ class App extends Component {
 		}
 		return (
 			<Container fluid={true}>
-				<LoginButton authButtonMethod={this.props.login} />
-				<LogoutButton logoutMethod={this.props.logout} />
 				<InboxList
 					user={this.props.user}
 					isAuthenticated={this.props.isAuthenticated}
+					loginMethod={this.props.login}
+					logoutMethod={this.props.logout}
 				/>
 				<StickyNote
 					user={this.props.user}
