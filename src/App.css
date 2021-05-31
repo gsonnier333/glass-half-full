@@ -55,7 +55,7 @@ body {
 	border: 1px solid rgba(200, 200, 210, 0.9);
 	float: right;
 	overflow: auto;
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: rgba(240, 240, 240, 0.9);
 }
 
 #mailList {
@@ -69,7 +69,7 @@ body {
 	margin: 10px 20px;
 	overflow-x: hidden;
 	overflow-y: auto;
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: rgba(240, 240, 240, 0.9);
 }
 
 .mailListItem {
@@ -80,7 +80,7 @@ body {
 	overflow: hidden;
 
 	cursor: pointer;
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: rgba(245, 245, 245, 0.9);
 }
 
 .mailListItem.focused {
@@ -110,7 +110,7 @@ body {
 	height: 540px;
 	margin: 10px 10px 0px;
 	border: 1px solid rgba(200, 200, 210, 0.9);
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: rgba(240, 240, 240, 0.9);
 }
 
 #stickyNote {
@@ -134,7 +134,7 @@ h1 {
 
 #customNavbar {
 	border: 1px solid rgba(200, 200, 210, 0.9);
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: rgba(240, 240, 240, 0.9);
 	height: 40px;
 	padding: 0px 10px;
 	position: sticky;
@@ -148,7 +148,7 @@ h1 {
 	position: sticky;
 	top: 0;
 	height: 35px;
-	background-color: rgba(230, 230, 230, 0.9);
+	background-color: rgba(255, 255, 255, 0.9);
 	color: black;
 	float: left;
 	border-radius: 5px;
