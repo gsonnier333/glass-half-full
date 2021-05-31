@@ -30,7 +30,6 @@ module.exports = (app) => {
 	});
 
 	app.get("/api/notes/:id", (req, res) => {
-		console.log(req.params.id);
 		db.Note.findAll({
 			attributes: ["userNotes"],
 			where: { userId: req.params.id },
@@ -41,5 +40,14 @@ module.exports = (app) => {
 			.catch((err) => {
 				res.json(err);
 			});
+	});
+
+	app.post("/api/notes", (req, res) => {
+		db.Note.update(
+			{ userNotes: req.body.note },
+			{
+				where: { userId: req.body.userId },
+			}
+		);
 	});
 };
