@@ -99,7 +99,7 @@ body {
 	position: absolute;
 	left: 0%;
 	width: 16%;
-	height: 68vmin;
+	height: 63.5vmin;
 	margin: 10px 10px 0px;
 	border: 1px solid rgba(200, 200, 210, 0.9);
 	background-color: rgba(255, 255, 255, 0.9);
@@ -116,6 +116,7 @@ body {
 	padding: 10px;
 	background-color: rgba(255, 255, 161, 0.9);
 	border: 1px solid rgba(230, 170, 80, 0.9);
+	border-top: 20px solid rgba(230, 230, 150, 0.9);
 	resize: none;
 }
 
