@@ -81,19 +81,27 @@ export default function withAuthProvider(WrappedComponent) {
 		// }
 
 		async login() {
-			try {
-				await this.publicClientApplication.loginRedirect({
-					scopes: config.scopes,
-					prompt: "select_account",
-				});
+			const accounts = this.publicClientApplication.getAllAccounts();
 
-				await this.getUserProfile();
-			} catch (err) {
+			if (accounts && accounts.length > 0) {
 				this.setState({
-					isAuthenticated: false,
-					user: "hello",
-					error: this.normalizeError(err),
+					isAuthenticated: true,
 				});
+			} else {
+				try {
+					await this.publicClientApplication.loginRedirect({
+						scopes: config.scopes,
+						prompt: "select_account",
+					});
+
+					await this.getUserProfile();
+				} catch (err) {
+					this.setState({
+						isAuthenticated: false,
+						user: "hello",
+						error: this.normalizeError(err),
+					});
+				}
 			}
 		}
 
