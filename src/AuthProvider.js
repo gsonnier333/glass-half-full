@@ -82,13 +82,26 @@ export default function withAuthProvider(WrappedComponent) {
 
 		async login() {
 			try {
-				await this.publicClientApplication.handleRedirectPromise();
-				await this.publicClientApplication.loginRedirect({
-					scopes: config.scopes,
-					prompt: "select_account",
-				});
-
-				await this.getUserProfile();
+				this.publicClientApplication
+					.handleRedirectPromise()
+					.then((token) => {
+						//get a token response
+						if (!token) {
+							//if we don't get one
+							const accounts =
+								this.publicClientApplication.getAllAccounts();
+							if (accounts === 0) {
+								//if we're not already logged in
+								this.publicClientApplication.loginRedirect({
+									scopes: config.scopes,
+									prompt: "select_account",
+								});
+							}
+						} else {
+							//if we do get a token
+							this.getUserProfile();
+						}
+					});
 			} catch (err) {
 				console.log(err);
 				this.setState({
@@ -100,7 +113,7 @@ export default function withAuthProvider(WrappedComponent) {
 		}
 
 		logout() {
-			this.publicClientApplication.logout();
+			this.publicClientApplication.logoutRedirect();
 		}
 
 		async getAccessToken(scopes) {
