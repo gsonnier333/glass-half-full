@@ -107,6 +107,39 @@ body {
 		width: 40%;
 	}
 
+	.mailListItem {
+		border-bottom: 1px solid rgba(119, 136, 153, 0.9);
+		padding-top: 5px;
+		width: 110%;
+		height: 100px;
+		overflow: hidden;
+
+		cursor: pointer;
+		background-color: rgba(245, 245, 245, 0.9);
+	}
+
+	.mailListItem:hover {
+		background-color: rgb(215, 235, 255);
+	}
+
+	.mailListItem.focused {
+		background-color: rgb(175, 195, 215);
+	}
+
+	.mailListItemSubject {
+		font-weight: bold;
+		font-size: 16px;
+	}
+
+	.mailListItemBody {
+		font-size: 14px;
+	}
+
+	.mailListItemSender {
+		font-size: 15px;
+		font-weight: 500;
+	}
+
 	#stickyNote {
 		display: none;
 	}
@@ -128,6 +161,38 @@ body {
 		left: 0;
 		height: 33%;
 		top: 65%;
+	}
+	.mailListItem {
+		border-bottom: 1px solid rgba(119, 136, 153, 0.9);
+		padding-top: 5px;
+		width: 110%;
+		height: 100px;
+		overflow: hidden;
+
+		cursor: pointer;
+		background-color: rgba(245, 245, 245, 0.9);
+	}
+
+	.mailListItem:hover {
+		background-color: rgb(215, 235, 255);
+	}
+
+	.mailListItem.focused {
+		background-color: rgb(175, 195, 215);
+	}
+
+	.mailListItemSubject {
+		font-weight: bold;
+		font-size: 16px;
+	}
+
+	.mailListItemBody {
+		font-size: 14px;
+	}
+
+	.mailListItemSender {
+		font-size: 15px;
+		font-weight: 500;
 	}
 
 	#stickyNote {
