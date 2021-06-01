@@ -91,7 +91,7 @@ export default function withAuthProvider(WrappedComponent) {
 							const accounts =
 								this.publicClientApplication.getAllAccounts();
 							console.log(accounts);
-							if (accounts === 0) {
+							if (accounts.length === 0) {
 								//if we're not already logged in
 								console.log("Logging in with loginRedirect()");
 								this.publicClientApplication.loginRedirect({
