@@ -124,12 +124,13 @@ export default function withAuthProvider(WrappedComponent) {
 			try {
 				const accounts = this.publicClientApplication.getAllAccounts();
 				if (accounts.length <= 0) throw new Error("login_required");
-
+				console.log("Getting result");
 				let silentResult =
 					await this.publicClientApplication.acquireTokenRedirect({
 						scopes: scopes,
 						account: accounts[0],
 					});
+				console.log(silentResult.accessToken);
 				return silentResult.accessToken;
 			} catch (err) {
 				console.log(err);
@@ -140,8 +141,10 @@ export default function withAuthProvider(WrappedComponent) {
 								scopes: scopes,
 							}
 						);
+					console.log(interractiveResult.accessToken);
 					return interractiveResult.accessToken;
 				} else {
+					console.log("Interaction not required, error");
 					throw err;
 				}
 			}
@@ -152,6 +155,7 @@ export default function withAuthProvider(WrappedComponent) {
 			try {
 				let accessToken = await this.getAccessToken(config.scopes);
 				if (accessToken) {
+					console.log(accessToken);
 					let user = await getUserDetails(accessToken);
 					let mail = await getMail(accessToken);
 					let messages = mail.value;
@@ -168,6 +172,7 @@ export default function withAuthProvider(WrappedComponent) {
 					});
 				}
 			} catch (err) {
+				console.log(err);
 				this.setState({
 					isAuthenticated: false,
 					user: "",
@@ -228,6 +233,7 @@ export default function withAuthProvider(WrappedComponent) {
 
 		isInteractionRequired(error) {
 			if (!error.message || error.message.length <= 0) {
+				console.log("isInteractionRequired returning false");
 				return false;
 			}
 
