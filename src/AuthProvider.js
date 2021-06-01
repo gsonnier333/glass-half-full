@@ -32,7 +32,7 @@ export default function withAuthProvider(WrappedComponent) {
 
 			this.publicClientApplication = new PublicClientApplication({
 				auth: {
-					clientId: config.appId,
+					clientId: process.env.APP_ID,
 					redirectUri: config.redirectUri,
 				},
 				cache: {
