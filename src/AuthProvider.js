@@ -82,7 +82,8 @@ export default function withAuthProvider(WrappedComponent) {
 
 		async login() {
 			try {
-				await this.publicClientApplication.loginPopup({
+				await this.publicClientApplication.handleRedirectPromise();
+				await this.publicClientApplication.loginRedirect({
 					scopes: config.scopes,
 					prompt: "select_account",
 				});
@@ -108,7 +109,7 @@ export default function withAuthProvider(WrappedComponent) {
 				if (accounts.length <= 0) throw new Error("login_required");
 
 				let silentResult =
-					await this.publicClientApplication.acquireTokenSilent({
+					await this.publicClientApplication.acquireTokenRedirect({
 						scopes: scopes,
 						account: accounts[0],
 					});
@@ -116,9 +117,11 @@ export default function withAuthProvider(WrappedComponent) {
 			} catch (err) {
 				if (this.isInteractionRequired(err)) {
 					let interractiveResult =
-						await this.publicClientApplication.acquireTokenSilent({
-							scopes: scopes,
-						});
+						await this.publicClientApplication.acquireTokenRedirect(
+							{
+								scopes: scopes,
+							}
+						);
 					return interractiveResult.accessToken;
 				} else {
 					throw err;
