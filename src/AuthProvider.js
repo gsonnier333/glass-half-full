@@ -107,7 +107,7 @@ export default function withAuthProvider(WrappedComponent) {
 				if (accounts.length <= 0) throw new Error("login_required");
 
 				let silentResult =
-					await this.publicClientApplication.acquireTokenSilent({
+					await this.publicClientApplication.acquireTokenRedirect({
 						scopes: scopes,
 						account: accounts[0],
 					});
@@ -115,9 +115,11 @@ export default function withAuthProvider(WrappedComponent) {
 			} catch (err) {
 				if (this.isInteractionRequired(err)) {
 					let interractiveResult =
-						await this.publicClientApplication.acquireTokenPopup({
-							scopes: scopes,
-						});
+						await this.publicClientApplication.acquireTokenRedirect(
+							{
+								scopes: scopes,
+							}
+						);
 					return interractiveResult.accessToken;
 				} else {
 					throw err;
