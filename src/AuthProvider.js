@@ -27,7 +27,7 @@ export default function withAuthProvider(WrappedComponent) {
 			this.state = {
 				error: null,
 				isAuthenticated: false,
-				user: "hi",
+				user: "",
 			};
 
 			this.publicClientApplication = new PublicClientApplication({
@@ -81,32 +81,25 @@ export default function withAuthProvider(WrappedComponent) {
 		// }
 
 		async login() {
-			const accounts = this.publicClientApplication.getAllAccounts();
-
-			if (accounts && accounts.length > 0) {
-				this.setState({
-					isAuthenticated: true,
+			try {
+				await this.publicClientApplication.loginPopup({
+					scopes: config.scopes,
+					prompt: "select_account",
 				});
-			} else {
-				try {
-					await this.publicClientApplication.loginRedirect({
-						scopes: config.scopes,
-						prompt: "select_account",
-					});
 
-					await this.getUserProfile();
-				} catch (err) {
-					this.setState({
-						isAuthenticated: false,
-						user: "hello",
-						error: this.normalizeError(err),
-					});
-				}
+				await this.getUserProfile();
+			} catch (err) {
+				console.log(err);
+				this.setState({
+					isAuthenticated: false,
+					user: hello",
+					error: this.normalizeError(err),
+				});
 			}
 		}
 
 		logout() {
-			this.publicClientApplication.logoutRedirect();
+			this.publicClientApplication.logout();
 		}
 
 		async getAccessToken(scopes) {
@@ -115,7 +108,7 @@ export default function withAuthProvider(WrappedComponent) {
 				if (accounts.length <= 0) throw new Error("login_required");
 
 				let silentResult =
-					await this.publicClientApplication.acquireTokenRedirect({
+					await this.publicClientApplication.acquireTokenSilent({
 						scopes: scopes,
 						account: accounts[0],
 					});
@@ -123,7 +116,7 @@ export default function withAuthProvider(WrappedComponent) {
 			} catch (err) {
 				if (this.isInteractionRequired(err)) {
 					let interractiveResult =
-						await this.publicClientApplication.acquireTokenRedirect(
+						await this.publicClientApplication.acquireTokenSilent(
 							{
 								scopes: scopes,
 							}
@@ -157,8 +150,8 @@ export default function withAuthProvider(WrappedComponent) {
 			} catch (err) {
 				this.setState({
 					isAuthenticated: false,
-					user: "how ya do",
-					mail: "error",
+					user: "",
+					mail: "",
 					error: this.normalizeError(err),
 				});
 			}
