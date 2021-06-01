@@ -82,7 +82,7 @@ export default function withAuthProvider(WrappedComponent) {
 
 		async login() {
 			try {
-				await this.publicClientApplication.loginPopup({
+				await this.publicClientApplication.loginRedirect({
 					scopes: config.scopes,
 					prompt: "select_account",
 				});
@@ -98,7 +98,7 @@ export default function withAuthProvider(WrappedComponent) {
 		}
 
 		logout() {
-			this.publicClientApplication.logout();
+			this.publicClientApplication.logoutRedirect();
 		}
 
 		async getAccessToken(scopes) {
