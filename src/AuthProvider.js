@@ -90,8 +90,10 @@ export default function withAuthProvider(WrappedComponent) {
 							//if we don't get one
 							const accounts =
 								this.publicClientApplication.getAllAccounts();
+							console.log(accounts);
 							if (accounts === 0) {
 								//if we're not already logged in
+								console.log("Logging in with loginRedirect()");
 								this.publicClientApplication.loginRedirect({
 									scopes: config.scopes,
 									prompt: "select_account",
@@ -99,6 +101,7 @@ export default function withAuthProvider(WrappedComponent) {
 							}
 						} else {
 							//if we do get a token
+							console.log(token);
 							this.getUserProfile();
 						}
 					});
@@ -117,6 +120,7 @@ export default function withAuthProvider(WrappedComponent) {
 		}
 
 		async getAccessToken(scopes) {
+			console.log("Getting access token");
 			try {
 				const accounts = this.publicClientApplication.getAllAccounts();
 				if (accounts.length <= 0) throw new Error("login_required");
@@ -128,6 +132,7 @@ export default function withAuthProvider(WrappedComponent) {
 					});
 				return silentResult.accessToken;
 			} catch (err) {
+				console.log(err);
 				if (this.isInteractionRequired(err)) {
 					let interractiveResult =
 						await this.publicClientApplication.acquireTokenRedirect(
@@ -143,6 +148,7 @@ export default function withAuthProvider(WrappedComponent) {
 		}
 
 		async getUserProfile() {
+			console.log("Getting profile");
 			try {
 				let accessToken = await this.getAccessToken(config.scopes);
 				if (accessToken) {
