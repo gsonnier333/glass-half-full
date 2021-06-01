@@ -3,8 +3,6 @@ import { PublicClientApplication } from "@azure/msal-browser";
 import { config } from "./config";
 import { getUserDetails, getMail } from "./GraphService";
 
-const envAppId = process.env.APP_ID;
-
 // export class AuthComponentProps {
 // 	error;
 // 	isAuthenticated;
@@ -34,7 +32,7 @@ export default function withAuthProvider(WrappedComponent) {
 
 			this.publicClientApplication = new PublicClientApplication({
 				auth: {
-					clientId: envAppId,
+					clientId: process.env.REACT_APP_APP_ID,
 					redirectUri: config.redirectUri,
 				},
 				cache: {
