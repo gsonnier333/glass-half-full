@@ -64,7 +64,7 @@ export default class StickyNote extends Component {
 					return res.json();
 				})
 				.then((data) => {
-					console.log(data);
+					// console.log(data);
 					document.querySelector("#stickyNote").value =
 						data[0].userNotes;
 				})
@@ -76,7 +76,7 @@ export default class StickyNote extends Component {
 
 	updateNote() {
 		if (this.props.isAuthenticated && this.state.canUpdate) {
-			console.log("Waiting to post updated note");
+			// console.log("Waiting to post updated note");
 			this.setState({ canUpdate: false });
 			setTimeout(
 				function () {
@@ -90,7 +90,7 @@ export default class StickyNote extends Component {
 					}).catch((err) => {
 						console.log(err);
 					});
-					console.log("Posting updated note");
+					// console.log("Posting updated note");
 					this.setState({ canUpdate: true });
 				}.bind(this),
 				5000
