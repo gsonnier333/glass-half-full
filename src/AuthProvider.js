@@ -92,7 +92,7 @@ export default function withAuthProvider(WrappedComponent) {
 				console.log(err);
 				this.setState({
 					isAuthenticated: false,
-					user: hello",
+					user: "",
 					error: this.normalizeError(err),
 				});
 			}
@@ -116,11 +116,9 @@ export default function withAuthProvider(WrappedComponent) {
 			} catch (err) {
 				if (this.isInteractionRequired(err)) {
 					let interractiveResult =
-						await this.publicClientApplication.acquireTokenSilent(
-							{
-								scopes: scopes,
-							}
-						);
+						await this.publicClientApplication.acquireTokenSilent({
+							scopes: scopes,
+						});
 					return interractiveResult.accessToken;
 				} else {
 					throw err;
