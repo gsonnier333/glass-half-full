@@ -11,10 +11,10 @@ const db = require("./src/models");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("build"));
+app.use(express.static(path.join(__dirname, "build")));
 
 app.get("/", (req, res) => {
-	res.sendFile(path.join(__dirname + "/build/index.html"));
+	res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 require("./src/routes/note-routes.js")(app);
