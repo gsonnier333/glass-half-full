@@ -80,7 +80,7 @@ export default function withAuthProvider(WrappedComponent) {
 		// 	}
 		// }
 
-		async login() {
+		login() {
 			try {
 				this.publicClientApplication
 					.handleRedirectPromise()
