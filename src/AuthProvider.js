@@ -43,6 +43,7 @@ export default function withAuthProvider(WrappedComponent) {
 		}
 
 		componentDidMount() {
+			this.login();
 			const accounts = this.publicClientApplication.getAllAccounts();
 
 			if (accounts && accounts.length > 0) {
