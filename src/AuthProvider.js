@@ -43,7 +43,14 @@ export default function withAuthProvider(WrappedComponent) {
 		}
 
 		componentDidMount() {
-			this.login();
+			this.publicClientApplication
+				.handleRedirectPromise()
+				.then((token) => {
+					if (token) {
+						//if we already have a token from logging in
+						this.getUserProfile();
+					}
+				});
 			const accounts = this.publicClientApplication.getAllAccounts();
 
 			if (accounts && accounts.length > 0) {
