@@ -98,10 +98,10 @@ export default function withAuthProvider(WrappedComponent) {
 							//if we don't get one
 							const accounts =
 								this.publicClientApplication.getAllAccounts();
-							console.log(accounts);
+							// console.log(accounts);
 							if (accounts.length === 0) {
 								//if we're not already logged in
-								console.log("Logging in with loginRedirect()");
+								// console.log("Logging in with loginRedirect()");
 								this.publicClientApplication.loginRedirect({
 									scopes: config.scopes,
 									prompt: "select_account",
@@ -109,12 +109,12 @@ export default function withAuthProvider(WrappedComponent) {
 							}
 						} else {
 							//if we do get a token
-							console.log(token);
+							// console.log(token);
 							this.getUserProfile();
 						}
 					});
 			} catch (err) {
-				console.log(err);
+				// console.log(err);
 				this.setState({
 					isAuthenticated: false,
 					user: "",
@@ -128,40 +128,40 @@ export default function withAuthProvider(WrappedComponent) {
 		}
 
 		async getAccessToken(scopes) {
-			console.log("Getting access token");
+			// console.log("Getting access token");
 			try {
 				const accounts = this.publicClientApplication.getAllAccounts();
 				if (accounts.length <= 0) throw new Error("login_required");
-				console.log("Getting result");
+				// console.log("Getting result");
 				let silentResult =
 					await this.publicClientApplication.acquireTokenSilent({
 						scopes: scopes,
 						account: accounts[0],
 					});
-				console.log(silentResult.accessToken);
+				// console.log(silentResult.accessToken);
 				return silentResult.accessToken;
 			} catch (err) {
-				console.log(err);
+				// console.log(err);
 				if (this.isInteractionRequired(err)) {
 					let interractiveResult =
 						await this.publicClientApplication.acquireTokenSilent({
 							scopes: scopes,
 						});
-					console.log(interractiveResult.accessToken);
+					// console.log(interractiveResult.accessToken);
 					return interractiveResult.accessToken;
 				} else {
-					console.log("Interaction not required, error");
+					// console.log("Interaction not required, error");
 					throw err;
 				}
 			}
 		}
 
 		async getUserProfile() {
-			console.log("Getting profile");
+			// console.log("Getting profile");
 			try {
 				let accessToken = await this.getAccessToken(config.scopes);
 				if (accessToken) {
-					console.log(accessToken);
+					// console.log(accessToken);
 					let user = await getUserDetails(accessToken);
 					let mail = await getMail(accessToken);
 					let messages = mail.value;
@@ -178,7 +178,7 @@ export default function withAuthProvider(WrappedComponent) {
 					});
 				}
 			} catch (err) {
-				console.log(err);
+				// console.log(err);
 				this.setState({
 					isAuthenticated: false,
 					user: "",
@@ -238,9 +238,9 @@ export default function withAuthProvider(WrappedComponent) {
 		}
 
 		isInteractionRequired(error) {
-			console.log("isInteractionRequired called");
+			// console.log("isInteractionRequired called");
 			if (!error.message || error.message.length <= 0) {
-				console.log("isInteractionRequired returning false");
+				// console.log("isInteractionRequired returning false");
 				return false;
 			}
 
