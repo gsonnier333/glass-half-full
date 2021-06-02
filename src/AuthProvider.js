@@ -126,7 +126,7 @@ export default function withAuthProvider(WrappedComponent) {
 				if (accounts.length <= 0) throw new Error("login_required");
 				console.log("Getting result");
 				let silentResult =
-					await this.publicClientApplication.acquireTokenRedirect({
+					await this.publicClientApplication.acquireTokenSilent({
 						scopes: scopes,
 						account: accounts[0],
 					});
@@ -136,11 +136,9 @@ export default function withAuthProvider(WrappedComponent) {
 				console.log(err);
 				if (this.isInteractionRequired(err)) {
 					let interractiveResult =
-						await this.publicClientApplication.acquireTokenRedirect(
-							{
-								scopes: scopes,
-							}
-						);
+						await this.publicClientApplication.acquireTokenSilent({
+							scopes: scopes,
+						});
 					console.log(interractiveResult.accessToken);
 					return interractiveResult.accessToken;
 				} else {
@@ -232,6 +230,7 @@ export default function withAuthProvider(WrappedComponent) {
 		}
 
 		isInteractionRequired(error) {
+			console.log("isInteractionRequired called");
 			if (!error.message || error.message.length <= 0) {
 				console.log("isInteractionRequired returning false");
 				return false;
